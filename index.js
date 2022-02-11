@@ -8,10 +8,17 @@ function calculateForm() {
     const age = document.getElementById('age').value;
     const freeActivity = document.getElementById('free-activity').value;
     const workActivity = document.getElementById('work-activity').value;
+
+    var format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+
     
     // Check if variables are empty
     if (!name || !heightcm || !weight || !waist || !gender || !age || !freeActivity || !workActivity) {
         document.getElementById("text").innerHTML = "Täytä puuttuvat arvot";
+    }
+    else if (name.includes("<") || name.includes("{") || name.includes("[")) {
+        document.getElementById("text").innerHTML = "Ei erikoismerkkejä";
     }
     else {
         const bmi = calculateBMI(heightcm, weight);

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muiskismaiskis Terveys</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <main>
+        <section class="data">
+            <div class="form-wrapper">
+                <form>
+                    <label for="name">Nimi</label>
+                    <input type="text" id="name" name="name" placeholder="Nimi">
+                    <label for="height">Pituus</label>
+                    <input type="number" id="height" name="height" placeholder="cm">
+                    <label for="weight">Paino</label>
+                    <input type="number" id="weight" name="weight" placeholder="kg">
+                    <label for="waist">Vyötärön ympärys</label>
+                    <input type="number" id="waist" name="waist" placeholder="cm">
+                    <label for="gender">Sukupuoli</label>
+                    <select id="gender" name="gender">
+                        <option value="male">Mies</option>
+                        <option value="female">Nainen</option>
+                    </select>
+                    <label for="age">Ikä</label>
+                    <select id="age" name="age">
+                        <option value="young">18-30</option>
+                        <option value="middleage">31-60</option>
+                        <option value="old">&gt;60</option>
+                    </select>
+                    <label for="free-activity">Vapaa-ajan aktiivisuus</label>
+                    <select id="free-activity" name="free-activity">
+                        <option value="not-free-active">ei lainkaan aktiivinen</option>
+                        <option value="bit-free-active">satunnaisesti aktiivinen</option>
+                        <option value="daily-free-active">päivittäin aktiivinen</option>
+                        <option value="hc-free-active">poikkeuksellisen aktiivinen</option>
+                    </select>
+                    <label for="work-activity">Työn aktiivisuus</label>
+                    <select id="work-activity" name="work-activity">
+                        <option value="not-work-active">kevyt työ</option>
+                        <option value="bit-work-active">Kohtuullisen raskas työ</option>
+                        <option value="hc-work-active">Hyvin raskas työ</option>
+                    </select>
+                </form>
+                <button onclick="calculateForm()">Laske</button>
+            </div>
+            <div class="bmitable-wrapper">
+                <table>
+                    <tr>
+                        <th>BMI selite</th>
+                        <th>Painoindeksi</th>
+                    </tr>
+                    <tr id="sick-underweight">
+                        <td>Sairaalloinen alipaino</td>
+                        <td>0 - 14,9</td>
+                    </tr>
+                    <tr id="significant-underweight">
+                        <td>Merkittävä alipaino</td>
+                        <td>15 - 17,9</td>
+                    </tr>
+                    <tr id="slight-underweight">
+                        <td>Lievä alipaino</td>
+                        <td>18 - 18,9</td>
+                    </tr>
+                    <tr id="normal-weight">
+                        <td>Normaali paino</td>
+                        <td>19 - 24,9</td>
+                    </tr>
+                    <tr id="slight-overweight">
+                        <td>Lievä ylipaino</td>
+                        <td>25 - 29,9</td>
+                    </tr>
+                    <tr id="significant-overweight">
+                        <td>Merkittävä ylipaino</td>
+                        <td>30 - 34,9</td>
+                    </tr>
+                    <tr id="bad-overweight">
+                        <td>Vaikea ylipaino</td>
+                        <td>35 - 39,9</td>
+                    </tr>
+                    <tr id="sick-overweight">
+                        <td>Sairaalloinen ylipaino</td>
+                        <td>40 tai enemmän</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="waisttable-wrapper">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th id="normal-waist">Tavoitearvo (cm)</th>
+                        <th id="slight-health-hazar">Lievä terveyshaitta (cm) </th>
+                        <th id="significant-health-hazar">Huomattava terveyshaitta (cm) </th>
+                    </tr>
+                    <tr>
+                        <td>Miehet</td>
+                        <td id="normal-waist">&lt; 94</td>
+                        <td id="slight-health-hazar">94 - 101</td>
+                        <td id="significant-health-hazar">&gt; 102</td>
+                    </tr>
+                    <tr>
+                        <td>Naiset</td>
+                        <td id="normal-waist">&lt; 80</td>
+                        <td id="slight-health-hazar">80 - 87</td>
+                        <td id="significant-health-hazar">&gt; 88</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section class="feedback">
+            <div class="health-statement">
+                <p id="text"></p>
+            </div>
+            <div class="macro-nutrition">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Makro ravintoarvojen tarve päivittäin</th>
+                    </tr>
+                    <tr>
+                        <td>Hiilihydraatit</td>
+                        <td id="carbohydrates"></td>
+                    </tr>
+                    <tr>
+                        <td>Proteiini</td>
+                        <td id="protein"></td>
+                    </tr>
+                    <tr>
+                        <td>Rasva</td>
+                        <td id="fat"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="energy-need">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Energian tarve päivittäin</th>
+                    </tr>
+                    <tr>
+                        <td>Kalorit</td>
+                        <td id="kcal"></td>
+                    </tr>
+                    <tr>
+                        <td>Kilojoulet</td>
+                        <td id="kj"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section class="vitamins">
+            <div class="vitamin">
+                <table>
+                    <tr>
+                        <th>Vitamiini</th>
+                        <th>Lähteitä</th>
+                        <th>Tehtävät</th>
+                        <th>Puutosoireet</th>
+                        <th>Päivittäinen tarve</th>
+                    </tr>
+                    <tr>
+                        <td>A-vitamiini</td>
+                        <td>Maito, juusto, voi, munat, maksa. Myös beetakaroteenia sisältävät vihannekset ja hedelmät, erityisesti porkkana, mutta myös esimerkiksi lehtikaali, bataatti, pinaatti, tomaatti, paprika ja parsakaali. Elimistö muuntaa beetakaroteenin A-vitamiiniksi.</td>
+                        <td>Välttämätön hämäränäössä, solujen kasvussa ja erilaistumisessa sekä ihmisen lisääntymisessä, ylläpitää ihon ja limakalvojen kuntoa.</td>
+                        <td>Silmän sarveiskalvomuutokset, hämäräsokeus, ihon ja silmien sekä suun ja limakalvojen kuivuminen.</td>
+                        <td id="a-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>B1-vitamiini eli tiamiini</td>
+                        <td>Sianliha, täysjyvävilja, palkokasvit, pähkinät ja peruna.</td>
+                        <td>Muuttaa rasvaa ja hiilihydraatteja energiaksi ja osallistuu kasvuun, sekä hermoston, sydämen ja suoliston toimintaan.</td>
+                        <td>Yleisiä alkoholisteilla, ruokahaluttomuutta, väsymystä, lihasheikkoutta ja hermostovaurioita.</td>
+                        <td id="b1-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>B2-Vitamiini eli riboflaviini</td>
+                        <td>Maitotuotteet, liha ja kananmunat, täysjyvävilja ja oluthiiva.</td>
+                        <td>Tuottaa hiilihydraateista, proteiineista ja rasvasta energiaa soluille.</td>
+                        <td>Haavaumat suupielessä, suussa ja kielessä sekä ihottuma kasvoissa, hiustenlähtö.</td>
+                        <td id="b2-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>B3-Vitamiini eli niasiini</td>
+                        <td>Liha, kala, täysjyvävilja, pähkinät, sienet ja vihreät salaatit.</td>
+                        <td>Osallistuu solujen energiatuotantoon ja hermoston välittäjäaineiden muodostukseen sekä ihon ja ruuansulatusjärjestelmän ylläpitoon.</td>
+                        <td>Väsymys, masennus, ihottuma, ripuli.</td>
+                        <td id="b3-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>B6-Vitamiini eli pyridoksiini</td>
+                        <td>Sian- ja siipikarjanliha, munankeltuainen, maitotuotteet, kala, täysjyvävilja ja hiiva.</td>
+                        <td>Osallistuu proteiini- ja hiilihydraattiaineenvaihduntaan, hermoston toimintaan ja punasolujen muodostukseen.</td>
+                        <td>Puutos liittyy usein runsaaseen alkoholinkäyttöön, oireita ovat ihottumat ja keskushermosto-oireet, kuten huimaus ja kouristelu, sekä limakalvomuutokset ja anemia.</td>
+                        <td id="b6-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>Folaatti eli foolihappo</td>
+                        <td>Parhaita lähteitä tuoreet kasvikset, erityisesti kaalit, salaatit ja punajuuri, sekä hedelmät, pavut, marjat ja täysjyvävilja.</td>
+                        <td>Välttämätön solunjakautumisessa ja solujen geeniperimän ja proteiinin muodostuksessa, solujen,  erityisesti veren punasolujen muodostumisessa, kasvussa ja ruoansulatuskanavan hyvinvoinnissa. Raskauden aikana ehkäisee sikiön hermostoputken sulkeutumishäiriöitä.</td>
+                        <td>Anemia.</td>
+                        <td id="folaatti"></td>
+                    </tr>
+                    <tr>
+                        <td>B12-Vitamiini eli syanokobalamiini</td>
+                        <td>Vain eläinkunnan tuotteissa, etenkin lihassa, kalassa, maksassa ja maidossa, sekä joissakin maitohappokäymisellä valmistetuissa kasviselintarvikkeissa.</td>
+                        <td>Osallistuu elimistön aineenvaihduntaan ja on välttämätön nopeasti uusiutuvien solujen, kuten punasolujen, muodostumisessa ja hermoston toiminnassa.</td>
+                        <td>Häiriöitä punasolun muodostuksessa, anemiaa ja hermostollisia häiriöitä, kuten raajojen pistelyä ja tuntoaistin katoaminen jäsenistä.</td>
+                        <td id="b12-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>B5-Vitamiini eli pantoteenihappo</td>
+                        <td>Monissa ruoissa kuten lihassa, kalassa, täysjyväviljassa ja vihanneksissa.</td>
+                        <td>Osallistuu elimistön energiantuotantoon ja kolesterolin, rasvan ja punasolujen muodostukseen.</td>
+                        <td>Puutos erittäin harvinaista, oireina varpaiden tunnottomuus ja pistely.</td>
+                        <td id="b5-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>Biotiini eli H-vitamiini</td>
+                        <td>Lähes kaikissa ruoissa pieniä määriä.</td>
+                        <td>Osallistuu rasva- ja hiilihydraattiaineenvaihduntaan, vapauttaa ravinnosta energiaa.</td>
+                        <td>Puutos erittäin harvinaista.</td>
+                        <td id="h-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>C-Vitamiini</td>
+                        <td>Parhaita lähteitä sitrushedelmät, marjat, tuoreet hedelmät ja vihannekset, peruna.</td>
+                        <td>Edistää kasvua sekä luuston ja hampaiden muodostumista, osallistuu raudan imeytymiseen, ikenien ja ihon hyvinvointiin ja haavojen paranemiseen sekä edistää myös E-vitamiinin toimintaa ja suojaa elimistöä haitalliselta hapettumiselta.</td>
+                        <td>Väsymys ja tulehdusalttius, keripukki.</td>
+                        <td id="c-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>D-Vitamiini</td>
+                        <td>Auringonvalo, kala, kananmuna, maksa ja sienet; myös D-vitaminoitu maito ja margariini.</td>
+                        <td>Säätelee kalsium- ja fosforiaineenvaihduntaa ja välttämätön luun ja hampaiden muodostumisessa.</td>
+                        <td>Riisitauti ja luun pehmeneminen.</td>
+                        <td id="d-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>E-Vitamiini</td>
+                        <td>Hyviä lähteitä ovat rypsi-, soija ja auringonkukkaöljy sekä monet marjat.</td>
+                        <td>Pitää yllä solukalvon rakennetta, suojaa elimistön monityydyttymättömiä rasvahappoja vapailta radikaaleilta ja hapettumiselta. D-vitamiinia tutkitaan nyt laajasti, ja sen puutteella saattaa olla yhteyksiä joidenkin sairauksien syntyyn.</td>
+                        <td>Puutos on erittäin harvinaista.</td>
+                        <td id="e-vitamin"></td>
+                    </tr>
+                    <tr>
+                        <td>K-Vitamiini</td>
+                        <td>Hyviä lähteitä ovat vihreät lehtikasvikset kuten parsakaali, lehtikaali, pinaatti, vihreät pavut, herneet, avokado sekä kasviöljyt ja maksa, ihmisen suolistobakteerit tuottavat K-vitamiinia.</td>
+                        <td>Välttämätön veren normaalille hyytymiselle, osallistuu myös muiden proteiinien tuotantoon veressä, luu- ja sidekudoksessa sekä maksassa.</td>
+                        <td>Puutos on harvinaista, oireina ovat haavojen hidas paraneminen, mustelmataipumus ja limakalvoverenvuodot.</td>
+                        <td id="k-vitamin"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

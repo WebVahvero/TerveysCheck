@@ -11,4 +11,4 @@ As a result, you will receive a health assessment and recommendations
 - Feedback and other things are only in Finnish.
 
 ## Link to website
-[TerveysCheck(https://webvahvero.github.io/TerveysCheck/).
+[TerveysCheck](https://webvahvero.github.io/TerveysCheck/).
